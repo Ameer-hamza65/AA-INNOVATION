@@ -34,10 +34,10 @@ const PillarsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-horizon text-xs tracking-[0.3em] uppercase mb-4 font-medium">How We Deliver</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-ocean">Four Pillars of Delivery</h2>
-          <p className="text-foreground/60 mt-4 max-w-2xl mx-auto">
-            Everything AA Innovation does connects back to four core delivery pillars. They define who we are, 
+          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-4 font-medium">How We Deliver</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">Four Pillars of Delivery</h2>
+          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+            Everything AA Innovation does connects back to four core delivery pillars. They define who we are,
             how we work, and why organizations choose us over firms ten times our size.
           </p>
         </motion.div>
@@ -50,10 +50,10 @@ const PillarsSection = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               viewport={{ once: true }}
-              className="bg-prussian p-8 text-primary-foreground border-t-2 border-horizon"
+              className="bg-secondary p-8 border border-border border-t-2 border-t-primary"
             >
-              <span className="text-horizon text-3xl font-bold">{p.num}</span>
-              <h3 className="text-lg font-semibold mt-4 mb-3">{p.title}</h3>
+              <span className="text-primary text-3xl font-bold">{p.num}</span>
+              <h3 className="text-lg font-semibold text-foreground mt-4 mb-3">{p.title}</h3>
               <p className="text-sterling text-sm leading-relaxed">{p.desc}</p>
             </motion.div>
           ))}

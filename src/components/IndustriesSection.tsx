@@ -14,7 +14,7 @@ const industries = [
 
 const IndustriesSection = () => {
   return (
-    <section className="py-24 bg-frost">
+    <section className="py-24 bg-card">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0 }}
@@ -23,9 +23,9 @@ const IndustriesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-horizon text-xs tracking-[0.3em] uppercase mb-4 font-medium">Where We Operate</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-ocean">Industries We Serve</h2>
-          <p className="text-foreground/60 mt-4 max-w-2xl mx-auto">
+          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-4 font-medium">Where We Operate</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">Industries We Serve</h2>
+          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             Specialized capabilities across seven core industries, each led by sector veterans.
           </p>
         </motion.div>
@@ -38,14 +38,16 @@ const IndustriesSection = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: i * 0.04 }}
               viewport={{ once: true }}
-              className="bg-card p-6 border border-border hover:border-horizon transition-colors group"
+              className="bg-background p-6 border border-border rounded-lg hover:border-primary/50 transition-colors group"
             >
-              <ind.icon size={22} className="text-horizon mb-4" />
-              <h3 className="text-prussian font-semibold mb-2">{ind.title}</h3>
-              <p className="text-foreground/60 text-sm mb-4">{ind.tagline}</p>
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <ind.icon size={20} className="text-primary" />
+              </div>
+              <h3 className="text-foreground font-semibold mb-2">{ind.title}</h3>
+              <p className="text-muted-foreground text-sm mb-4">{ind.tagline}</p>
               <Link
                 to="/industries"
-                className="text-horizon text-sm font-medium inline-flex items-center gap-1"
+                className="text-primary text-sm font-medium inline-flex items-center gap-1"
               >
                 Learn More <ArrowRight size={14} />
               </Link>

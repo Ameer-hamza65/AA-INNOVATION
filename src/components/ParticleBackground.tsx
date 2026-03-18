@@ -1,53 +1,92 @@
-import { useMemo } from "react";
+import { useEffect, useRef } from "react";
 
 const ParticleBackground = () => {
-  const particles = useMemo(() => {
-    return Array.from({ length: 30 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 8}s`,
-      duration: `${6 + Math.random() * 6}s`,
-    }));
-  }, []);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const lines = useMemo(() => {
-    return Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 80}%`,
-      top: `${Math.random() * 100}%`,
-      width: `${100 + Math.random() * 200}px`,
-      rotation: `${Math.random() * 360}deg`,
-      delay: `${Math.random() * 6}s`,
-    }));
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationId: number;
+    const particles: { x: number; y: number; vx: number; vy: number; size: number; opacity: number }[] = [];
+    let w = 0;
+    let h = 0;
+
+    const resize = () => {
+      w = canvas.offsetWidth;
+      h = canvas.offsetHeight;
+      canvas.width = w * window.devicePixelRatio;
+      canvas.height = h * window.devicePixelRatio;
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+    };
+
+    const init = () => {
+      resize();
+      const count = Math.min(80, Math.floor((w * h) / 12000));
+      particles.length = 0;
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 1.5 + 0.5,
+          opacity: Math.random() * 0.4 + 0.1,
+        });
+      }
+    };
+
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(201, 100%, 36%, ${p.opacity})`;
+        ctx.fill();
+      });
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `hsla(201, 100%, 36%, ${0.08 * (1 - dist / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationId = requestAnimationFrame(draw);
+    };
+
+    init();
+    draw();
+    window.addEventListener("resize", init);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", init);
+    };
   }, []);
 
   return (
-    <>
-      <div className="absolute inset-0 pointer-events-none">
-        {particles.map((p) => (
-          <div
-            key={p.id}
-            className="particle"
-            style={{ left: p.left, top: p.top, animationDelay: p.delay, animationDuration: p.duration }}
-          />
-        ))}
-        {lines.map((l) => (
-          <div
-            key={l.id}
-            className="network-line"
-            style={{
-              left: l.left,
-              top: l.top,
-              width: l.width,
-              transform: `rotate(${l.rotation})`,
-              animationDelay: l.delay,
-            }}
-          />
-        ))}
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background pointer-events-none" />
-    </>
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+    />
   );
 };
 

@@ -25,18 +25,18 @@ const Solutions = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <section className="bg-prussian pt-28 pb-16">
+      <section className="bg-secondary pt-28 pb-16 border-b border-border">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-            <p className="text-horizon text-xs tracking-[0.3em] uppercase mb-4 font-medium">What We Offer</p>
-            <h1 className="text-4xl md:text-5xl font-black text-primary-foreground mb-6">Expert Solutions for a Digital Future</h1>
-            <p className="text-sterling/80 max-w-2xl text-lg leading-relaxed mb-8">
-              Technology and consulting solutions built for the specific realities of each industry we serve, 
+            <p className="text-primary text-xs tracking-[0.3em] uppercase mb-4 font-medium">What We Offer</p>
+            <h1 className="text-4xl md:text-5xl font-black text-foreground mb-6">Expert Solutions for a Digital Future</h1>
+            <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed mb-8">
+              Technology and consulting solutions built for the specific realities of each industry we serve,
               executed by experts who have spent careers inside them.
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-3 bg-horizon text-primary-foreground px-8 py-3.5 text-sm font-medium hover:bg-accent/90 transition-colors"
+              className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-3.5 text-sm font-medium rounded-full hover:bg-accent/90 transition-colors"
             >
               Book a Free Strategy Call <ArrowRight size={16} />
             </Link>
@@ -53,8 +53,8 @@ const Solutions = () => {
                 onClick={() => setActive(cat)}
                 className={`px-5 py-3 text-sm font-medium transition-colors border-b-2 -mb-px ${
                   active === cat
-                    ? "border-horizon text-prussian"
-                    : "border-transparent text-foreground/50 hover:text-foreground"
+                    ? "border-primary text-foreground"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {cat}
@@ -69,14 +69,16 @@ const Solutions = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: i * 0.04 }}
-                className="bg-card p-8 border border-border hover:border-horizon transition-colors group"
+                className="bg-card p-8 border border-border rounded-lg hover:border-primary/50 transition-colors group"
               >
-                <s.icon size={22} className="text-horizon mb-5" />
-                <h3 className="text-prussian font-semibold text-lg mb-3">{s.title}</h3>
-                <p className="text-foreground/60 text-sm leading-relaxed mb-4">{s.desc}</p>
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
+                  <s.icon size={20} className="text-primary" />
+                </div>
+                <h3 className="text-foreground font-semibold text-lg mb-3">{s.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">{s.desc}</p>
                 <Link
                   to="/contact"
-                  className="text-horizon text-sm font-medium inline-flex items-center gap-1"
+                  className="text-primary text-sm font-medium inline-flex items-center gap-1"
                 >
                   Learn More <ArrowRight size={14} />
                 </Link>

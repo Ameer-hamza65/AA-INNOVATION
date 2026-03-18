@@ -9,7 +9,7 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="bg-stats py-16">
+    <section className="bg-secondary py-16 border-y border-border">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
@@ -22,7 +22,7 @@ const StatsSection = () => {
               className="text-center"
             >
               <p className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</p>
-              <p className="text-stats-foreground/70 text-sm tracking-wide">{stat.label}</p>
+              <p className="text-muted-foreground text-sm tracking-wide">{stat.label}</p>
             </motion.div>
           ))}
         </div>

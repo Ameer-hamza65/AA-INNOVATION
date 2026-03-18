@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 @layer base {
   :root {
-    /* AA Innovation Light Theme */
+    /* AA Innovation Dark Theme — matching reference images */
     /* Prussian Blue #003153 */
     --prussian: 205 100% 16%;
     /* Deep Ocean #00487A */
@@ -19,23 +18,24 @@
     /* Frost #E4ECF2 */
     --frost: 210 33% 92%;
 
-    --background: 0 0% 100%;
-    --foreground: 205 100% 16%;
+    /* Dark theme: prussian-based backgrounds */
+    --background: 207 100% 10%;
+    --foreground: 210 33% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 205 100% 16%;
+    --card: 205 80% 13%;
+    --card-foreground: 210 33% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 205 100% 16%;
+    --popover: 205 80% 13%;
+    --popover-foreground: 210 33% 92%;
 
-    --primary: 205 100% 16%;
+    --primary: 201 100% 36%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 33% 92%;
-    --secondary-foreground: 205 100% 16%;
+    --secondary: 205 100% 16%;
+    --secondary-foreground: 210 33% 92%;
 
-    --muted: 210 33% 92%;
-    --muted-foreground: 203 20% 68%;
+    --muted: 205 60% 18%;
+    --muted-foreground: 203 20% 58%;
 
     --accent: 201 100% 36%;
     --accent-foreground: 0 0% 100%;
@@ -43,11 +43,11 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 25% 88%;
-    --input: 210 25% 88%;
+    --border: 205 50% 22%;
+    --input: 205 50% 22%;
     --ring: 201 100% 36%;
 
-    --radius: 0rem;
+    --radius: 0;
 
     --stats-bg: 205 100% 16%;
     --stats-foreground: 0 0% 100%;

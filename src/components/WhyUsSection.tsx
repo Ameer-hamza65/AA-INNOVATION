@@ -20,9 +20,9 @@ const WhyUsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <p className="text-horizon text-xs tracking-[0.3em] uppercase mb-4 font-medium">The Difference</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-ocean">Why AA Innovation</h2>
-          <p className="text-foreground/60 mt-4 max-w-2xl mx-auto">
+          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-4 font-medium">The Difference</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">Why AA Innovation</h2>
+          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             Organizations choose us because we deliver more than technology — we deliver outcomes.
           </p>
         </motion.div>
@@ -32,19 +32,19 @@ const WhyUsSection = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="overflow-hidden border border-border"
+          className="overflow-hidden border border-border rounded-lg"
         >
-          <div className="grid grid-cols-2 bg-prussian text-primary-foreground">
-            <div className="p-4 font-semibold text-sm">The AA Innovation Way</div>
-            <div className="p-4 font-semibold text-sm border-l border-ocean">The Alternative</div>
+          <div className="grid grid-cols-2 bg-secondary">
+            <div className="p-4 font-semibold text-sm text-foreground">The AA Innovation Way</div>
+            <div className="p-4 font-semibold text-sm text-foreground border-l border-border">The Alternative</div>
           </div>
           {rows.map((row, i) => (
             <div
               key={i}
-              className={`grid grid-cols-2 ${i % 2 === 0 ? "bg-frost" : "bg-card"}`}
+              className={`grid grid-cols-2 ${i % 2 === 0 ? "bg-card" : "bg-background"}`}
             >
-              <div className="p-4 text-sm text-foreground/80 font-medium">{row.us}</div>
-              <div className="p-4 text-sm text-foreground/50 border-l border-border">{row.them}</div>
+              <div className="p-4 text-sm text-sterling font-medium">{row.us}</div>
+              <div className="p-4 text-sm text-muted-foreground border-l border-border">{row.them}</div>
             </div>
           ))}
         </motion.div>
