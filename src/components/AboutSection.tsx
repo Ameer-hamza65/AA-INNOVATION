@@ -13,7 +13,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
           >
             <div className="relative rounded-lg overflow-hidden">
-              <img src={teamImg} alt="AA Innovation team collaboration" className="w-full h-auto object-cover rounded-lg" />
+              <img src={teamImg} alt="AA Innovation team collaboration" className="w-full h-auto object-cover" loading="lazy" decoding="async" width={800} height={450} />
               <div className="absolute bottom-6 left-6 right-6 bg-card/90 backdrop-blur-sm p-6 rounded-lg border border-border">
                 <p className="text-xs tracking-[0.3em] uppercase text-primary font-medium mb-2">Our Services</p>
                 <p className="text-foreground text-sm leading-relaxed">

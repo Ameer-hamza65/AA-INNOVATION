@@ -5,7 +5,7 @@ import ParticleBackground from "./ParticleBackground";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-background pt-[72px]">
+    <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-background pt-[80px]">
       <ParticleBackground />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-24">
         <div className="max-w-3xl">
@@ -47,16 +47,9 @@ const HeroSection = () => {
           >
             <Link
               to="/"
-              className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-3.5 text-sm font-medium rounded-full hover:bg-accent/90 transition-colors"
+              className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-3.5 text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors"
             >
               Book a Free Strategy Call
-              <ArrowRight size={16} />
-            </Link>
-            <Link
-              to="/case-studies"
-              className="inline-flex items-center gap-3 border border-border text-foreground px-8 py-3.5 text-sm font-medium rounded-full hover:bg-card transition-colors"
-            >
-              See Case Studies
               <ArrowRight size={16} />
             </Link>
           </motion.div>
