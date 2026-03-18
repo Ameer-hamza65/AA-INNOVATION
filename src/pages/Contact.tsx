@@ -9,7 +9,16 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 
 const topics = ["Industries", "Solutions", "Careers", "Partnerships", "Press / Media", "Website Feedback", "Other"];
-const locations = ["United States", "Canada", "United Kingdom", "Europe", "Asia Pacific", "Middle East", "Latin America", "Other"];
+const locations = [
+  "United States",
+  "Canada",
+  "United Kingdom",
+  "Europe",
+  "Asia Pacific",
+  "Middle East",
+  "Latin America",
+  "Other",
+];
 
 const quickLinks = [
   {
@@ -36,10 +45,37 @@ const Contact = () => {
   const { toast } = useToast();
   const [consent, setConsent] = useState("");
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({ title: "Message sent", description: "Thank you for contacting AA Innovation. We'll be in touch shortly." });
+    setIsSubmitting(true);
+    try {
+      const formData = new FormData(e.currentTarget);
+      formData.append("access_key", "7763cdc2-fc49-4460-8bf1-0ade6e50a3c4");
+      formData.append("subject", "New Contact Form Submission — AA Innovation");
+      formData.append("from_name", "AA Innovation Website");
+      formData.append("consent", consent);
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        toast({ title: "Message sent", description: "Thank you for contacting AA Innovation. We'll be in touch shortly." });
+        (e.target as HTMLFormElement).reset();
+        setConsent("");
+        setPrivacyAccepted(false);
+      } else {
+        toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "Error", description: "Network error. Please try again later.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -59,7 +95,6 @@ const Contact = () => {
       {/* Main Content — two columns */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-12">
-
           {/* Left — Form */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -75,30 +110,30 @@ const Contact = () => {
 
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Topic */}
-              <FormSelect label="Topic" required options={topics} placeholder="Please select" />
+              <FormSelect label="Topic" name="topic" required options={topics} placeholder="Please select" />
 
               {/* Name row */}
               <div className="grid sm:grid-cols-2 gap-5">
-                <FormInput label="First Name" required placeholder="Jane" />
-                <FormInput label="Last Name" required placeholder="Doe" />
+                <FormInput label="First Name" name="first_name" required placeholder="Jane" />
+                <FormInput label="Last Name" name="last_name" required placeholder="Doe" />
               </div>
 
               {/* Email & Company */}
               <div className="grid sm:grid-cols-2 gap-5">
-                <FormInput label="Email Address" required type="email" placeholder="jane.doe@company.com" />
-                <FormInput label="Company" required placeholder="Your Company" />
+                <FormInput label="Email Address" name="email" required type="email" placeholder="jane.doe@company.com" />
+                <FormInput label="Company" name="company" required placeholder="Your Company" />
               </div>
 
               {/* Job Title & Phone */}
               <div className="grid sm:grid-cols-2 gap-5">
-                <FormInput label="Job Title" required placeholder="Your Title" />
-                <FormInput label="Phone Number" type="tel" placeholder="+1 (555) 000-0000" />
+                <FormInput label="Job Title" name="job_title" required placeholder="Your Title" />
+                <FormInput label="Phone Number" name="phone" type="tel" placeholder="+1 (555) 000-0000" />
               </div>
 
               {/* Zip & Location */}
               <div className="grid sm:grid-cols-2 gap-5">
-                <FormInput label="Zip / Postal Code" required placeholder="00000" />
-                <FormSelect label="Location" required options={locations} placeholder="Select your location" />
+                <FormInput label="Zip / Postal Code" name="zip_code" required placeholder="00000" />
+                <FormSelect label="Location" name="location" required options={locations} placeholder="Select your location" />
               </div>
 
               {/* Message */}
@@ -107,6 +142,7 @@ const Contact = () => {
                   How can we help? <span className="text-primary">*</span>
                 </label>
                 <textarea
+                  name="message"
                   required
                   rows={5}
                   className="w-full px-4 py-3 border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none placeholder:text-muted-foreground"
@@ -122,11 +158,15 @@ const Contact = () => {
                 <RadioGroup value={consent} onValueChange={setConsent} className="flex gap-6">
                   <div className="flex items-center gap-2">
                     <RadioGroupItem value="yes" id="consent-yes" />
-                    <label htmlFor="consent-yes" className="text-sm text-foreground cursor-pointer">Yes</label>
+                    <label htmlFor="consent-yes" className="text-sm text-foreground cursor-pointer">
+                      Yes
+                    </label>
                   </div>
                   <div className="flex items-center gap-2">
                     <RadioGroupItem value="no" id="consent-no" />
-                    <label htmlFor="consent-no" className="text-sm text-foreground cursor-pointer">No</label>
+                    <label htmlFor="consent-no" className="text-sm text-foreground cursor-pointer">
+                      No
+                    </label>
                   </div>
                 </RadioGroup>
               </div>
@@ -140,8 +180,7 @@ const Contact = () => {
                   className="mt-0.5"
                 />
                 <label htmlFor="privacy" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                  I have read and accept the{" "}
-                  <span className="text-primary underline">Privacy Statement</span> and{" "}
+                  I have read and accept the <span className="text-primary underline">Privacy Statement</span> and{" "}
                   <span className="text-primary underline">Terms of Use</span>.
                 </label>
               </div>
@@ -149,9 +188,10 @@ const Contact = () => {
               {/* Submit */}
               <button
                 type="submit"
-                className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-3.5 text-sm font-medium rounded-full hover:bg-primary/80 transition-colors"
+                disabled={isSubmitting}
+                className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-3.5 text-sm font-medium rounded-full hover:bg-primary/80 transition-colors disabled:opacity-50"
               >
-                Submit <ArrowRight size={16} />
+                {isSubmitting ? "Sending..." : "Submit"} <ArrowRight size={16} />
               </button>
             </form>
           </motion.div>
@@ -206,12 +246,25 @@ const Contact = () => {
 
 /* ── Reusable sub-components ── */
 
-const FormInput = ({ label, required, type = "text", placeholder }: { label: string; required?: boolean; type?: string; placeholder?: string }) => (
+const FormInput = ({
+  label,
+  name,
+  required,
+  type = "text",
+  placeholder,
+}: {
+  label: string;
+  name: string;
+  required?: boolean;
+  type?: string;
+  placeholder?: string;
+}) => (
   <div>
     <label className="block text-sm font-medium text-foreground mb-2">
       {label} {required && <span className="text-primary">*</span>}
     </label>
     <input
+      name={name}
       type={type}
       required={required}
       placeholder={placeholder}
@@ -220,18 +273,32 @@ const FormInput = ({ label, required, type = "text", placeholder }: { label: str
   </div>
 );
 
-const FormSelect = ({ label, required, options, placeholder }: { label: string; required?: boolean; options: string[]; placeholder: string }) => (
+const FormSelect = ({
+  label,
+  name,
+  required,
+  options,
+  placeholder,
+}: {
+  label: string;
+  name: string;
+  required?: boolean;
+  options: string[];
+  placeholder: string;
+}) => (
   <div>
     <label className="block text-sm font-medium text-foreground mb-2">
       {label} {required && <span className="text-primary">*</span>}
     </label>
-    <Select required={required}>
+    <Select name={name} required={required}>
       <SelectTrigger className="w-full px-4 py-3 h-auto border border-border bg-card text-sm">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         {options.map((opt) => (
-          <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+          <SelectItem key={opt} value={opt}>
+            {opt}
+          </SelectItem>
         ))}
       </SelectContent>
     </Select>
