@@ -3,49 +3,26 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
-  const columns = [
-    {
-      title: "Industries",
-      links: [
-        { label: "Energy", to: "/industries" },
-        { label: "Healthcare", to: "/industries" },
-        { label: "Manufacturing", to: "/industries" },
-        { label: "Finance", to: "/industries" },
-        { label: "Consulting", to: "/industries" },
-        { label: "Federal", to: "/industries" },
-        { label: "Logistics", to: "/industries" },
-      ],
-    },
-    {
-      title: "Solutions",
-      links: [
-        { label: "AI & Automation", to: "/solutions" },
-        { label: "Data Analytics", to: "/solutions" },
-        { label: "Cloud Services", to: "/solutions" },
-        { label: "Cybersecurity", to: "/solutions" },
-      ],
-    },
-    {
-      title: "Company",
-      links: [
-        { label: "Home", to: "/home" },
-        { label: "Contact", to: "/" },
-      ],
-    },
-  ];
+  const scrollTo = (hash: string) => {
+    if (window.location.pathname !== "/") {
+      window.location.href = "/" + hash;
+      return;
+    }
+    const el = document.querySelector(hash);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <footer className="bg-secondary border-t border-border py-16">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="md:col-span-1">
             <div className="mb-4">
               <img src={logo} alt="AA Innovation" className="h-10 w-auto mb-1" loading="lazy" decoding="async" width={120} height={40} />
               <p className="text-horizon text-[10px] tracking-widest uppercase mt-1">Always Ahead.</p>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-6">
               Empowering organizations through innovative technology solutions.
-              Transforming challenges into competitive advantages.
             </p>
             <p className="text-muted-foreground text-sm mb-4">info@aainnovation.com</p>
             <div className="flex gap-4">
@@ -57,31 +34,41 @@ const Footer = () => {
             </div>
           </div>
 
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h4 className="text-foreground font-medium text-sm mb-4">{col.title}</h4>
-              <ul className="space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <Link to={link.to} className="text-muted-foreground text-sm hover:text-foreground transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <h4 className="text-foreground font-medium text-sm mb-4">Navigation</h4>
+            <ul className="space-y-3">
+              <li><Link to="/" className="text-muted-foreground text-sm hover:text-foreground transition-colors">Home</Link></li>
+              <li><button onClick={() => scrollTo("#about")} className="text-muted-foreground text-sm hover:text-foreground transition-colors">About Us</button></li>
+              <li><button onClick={() => scrollTo("#services")} className="text-muted-foreground text-sm hover:text-foreground transition-colors">Services</button></li>
+              <li><button onClick={() => scrollTo("#industries")} className="text-muted-foreground text-sm hover:text-foreground transition-colors">Industries</button></li>
+              <li><button onClick={() => scrollTo("#contact")} className="text-muted-foreground text-sm hover:text-foreground transition-colors">Contact Us</button></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-foreground font-medium text-sm mb-4">Services</h4>
+            <ul className="space-y-3">
+              <li><Link to="/services/ai-automation" className="text-muted-foreground text-sm hover:text-foreground transition-colors">AI & Automation</Link></li>
+              <li><Link to="/services/data-analytics" className="text-muted-foreground text-sm hover:text-foreground transition-colors">Data Analytics</Link></li>
+              <li><Link to="/services/cloud-solutions" className="text-muted-foreground text-sm hover:text-foreground transition-colors">Cloud Solutions</Link></li>
+              <li><Link to="/services/cybersecurity" className="text-muted-foreground text-sm hover:text-foreground transition-colors">Cybersecurity</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-foreground font-medium text-sm mb-4">Company</h4>
+            <ul className="space-y-3">
+              <li><Link to="/about" className="text-muted-foreground text-sm hover:text-foreground transition-colors">About Us</Link></li>
+              <li><button onClick={() => scrollTo("#contact")} className="text-muted-foreground text-sm hover:text-foreground transition-colors">Contact</button></li>
+            </ul>
+          </div>
         </div>
 
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-xs">
-            © 2026 AA Innovation LLC. All rights reserved.
-          </p>
+          <p className="text-muted-foreground text-xs">© 2026 AA Innovation LLC. All rights reserved.</p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookies"].map((link) => (
-              <a key={link} href="#" className="text-muted-foreground text-xs hover:text-foreground transition-colors">
-                {link}
-              </a>
+              <a key={link} href="#" className="text-muted-foreground text-xs hover:text-foreground transition-colors">{link}</a>
             ))}
           </div>
         </div>

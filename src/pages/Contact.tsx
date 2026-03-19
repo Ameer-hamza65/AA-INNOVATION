@@ -52,7 +52,11 @@ const Contact = () => {
     setIsSubmitting(true);
     try {
       const formData = new FormData(e.currentTarget);
+<<<<<<< HEAD
+      formData.append("access_key", "3ca66874-abca-4f25-888e-a6b5e69fe2fd");
+=======
       formData.append("access_key", "7763cdc2-fc49-4460-8bf1-0ade6e50a3c4");
+>>>>>>> e8634c66063c4daaf87a1d59cea7d797701b196a
       formData.append("subject", "New Contact Form Submission — AA Innovation");
       formData.append("from_name", "AA Innovation Website");
       formData.append("consent", consent);
@@ -143,6 +147,20 @@ const Contact = () => {
                 </label>
                 <textarea
                   name="message"
+<<<<<<< HEAD
+                  required
+                  rows={5}
+                  className="w-full px-4 py-3 border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none placeholder:text-muted-foreground"
+                  placeholder="Tell us about your project, challenge, or question..."
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  How can we help? <span className="text-primary">*</span>
+                </label>
+                <textarea
+=======
+>>>>>>> e8634c66063c4daaf87a1d59cea7d797701b196a
                   required
                   rows={5}
                   className="w-full px-4 py-3 border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none placeholder:text-muted-foreground"

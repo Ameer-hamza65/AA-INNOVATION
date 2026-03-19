@@ -1,29 +1,46 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
-import ValuesSection from "@/components/ValuesSection";
-import PillarsSection from "@/components/PillarsSection";
 import IndustriesSection from "@/components/IndustriesSection";
 import StatsSection from "@/components/StatsSection";
 import WhyUsSection from "@/components/WhyUsSection";
-import ContactBanner from "@/components/ContactBanner";
+import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        const el = document.querySelector(location.hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [location]);
+
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <ValuesSection />
-      <PillarsSection />
-      <IndustriesSection />
-      <StatsSection />
-      <WhyUsSection />
-      <ContactBanner />
-      <Footer />
+    <div className="relative min-h-screen">
+      <div
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
+      <div className="fixed inset-0 bg-background/50" />
+      <div className="relative z-10">
+        <Navbar />
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <IndustriesSection />
+        <StatsSection />
+        <WhyUsSection />
+        <ContactSection />
+        <Footer />
+      </div>
     </div>
   );
 };

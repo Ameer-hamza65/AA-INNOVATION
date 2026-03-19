@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import teamImg from "@/assets/team-collab.jpg";
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-24 bg-background">
+    <section id="about" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -12,8 +14,8 @@ const AboutSection = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="relative rounded-lg overflow-hidden">
-              <img src={teamImg} alt="AA Innovation team collaboration" className="w-full h-auto object-cover" loading="lazy" decoding="async" width={800} height={450} />
+            <div className="relative overflow-hidden">
+              <img src={teamImg} alt="AA Innovation team collaboration" className="w-full h-[400px] md:h-[500px] object-cover" loading="lazy" decoding="async" width={800} height={500} />
               <div className="absolute bottom-6 left-6 right-6 bg-card/90 backdrop-blur-sm p-6 rounded-lg border border-border">
                 <p className="text-xs tracking-[0.3em] uppercase text-primary font-medium mb-2">Our Services</p>
                 <p className="text-foreground text-sm leading-relaxed">
@@ -42,12 +44,12 @@ const AboutSection = () => {
               At AA Innovation, we bring together a diverse team of experienced professionals, technologists,
               and industry specialists with deep domain expertise across every sector we serve.
             </p>
-            <div className="bg-frost/10 p-6 border-l-4 border-primary">
-              <p className="text-foreground/80 leading-relaxed text-sm">
-                We are driven by a singular purpose: to empower organizations to achieve more — delivering
-                solutions built for today and designed for tomorrow.
-              </p>
-            </div>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-6 py-3 text-sm font-medium rounded-full hover:bg-primary/90 transition-colors"
+            >
+              Learn More <ArrowRight size={16} />
+            </Link>
           </motion.div>
         </div>
       </div>

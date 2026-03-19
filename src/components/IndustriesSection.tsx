@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, Heart, Factory, DollarSign, Users, Building, Truck } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Zap, Heart, Factory, DollarSign, Users, Building, Truck } from "lucide-react";
 
 const industries = [
   { icon: Zap, title: "Energy", tagline: "Powering the Infrastructure of Tomorrow." },
@@ -14,7 +13,7 @@ const industries = [
 
 const IndustriesSection = () => {
   return (
-    <section className="py-24 bg-card">
+    <section id="industries" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0 }}
@@ -45,12 +44,6 @@ const IndustriesSection = () => {
               </div>
               <h3 className="text-foreground font-semibold mb-2">{ind.title}</h3>
               <p className="text-muted-foreground text-sm mb-4">{ind.tagline}</p>
-              <Link
-                to="/industries"
-                className="text-primary text-sm font-medium inline-flex items-center gap-1"
-              >
-                Learn More <ArrowRight size={14} />
-              </Link>
             </motion.div>
           ))}
         </div>

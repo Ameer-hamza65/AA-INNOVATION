@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import ParticleBackground from "./ParticleBackground";
 
 const HeroSection = () => {
+  const scrollToContact = () => {
+    const el = document.querySelector("#contact");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-background pt-[80px]">
-      <ParticleBackground />
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-[72px]">
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-24">
         <div className="max-w-3xl">
           <motion.p
@@ -43,15 +45,14 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-wrap gap-4"
           >
-            <Link
-              to="/"
+            <button
+              onClick={scrollToContact}
               className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-3.5 text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors"
             >
               Book a Free Strategy Call
               <ArrowRight size={16} />
-            </Link>
+            </button>
           </motion.div>
         </div>
       </div>

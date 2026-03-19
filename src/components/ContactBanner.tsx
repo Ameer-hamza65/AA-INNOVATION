@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const ContactBanner = () => {
   return (
-    <section className="bg-secondary py-16 border-y border-horizon">
+    <section className="py-16">
       <div className="max-w-5xl mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0 }}

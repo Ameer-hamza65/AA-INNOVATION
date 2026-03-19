@@ -11,7 +11,7 @@ const rows = [
 
 const WhyUsSection = () => {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0 }}

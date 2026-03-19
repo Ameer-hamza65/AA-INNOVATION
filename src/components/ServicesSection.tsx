@@ -5,24 +5,28 @@ import { Link } from "react-router-dom";
 const services = [
   {
     icon: Bot,
+    slug: "ai-automation",
     title: "AI & Automation",
     description:
       "Leverage artificial intelligence and machine learning to automate processes, gain insights, and drive innovation across your organization.",
   },
   {
     icon: BarChart3,
+    slug: "data-analytics",
     title: "Data & Analytics",
     description:
       "Transform raw data into actionable intelligence with advanced analytics platforms, real-time dashboards, and predictive modeling.",
   },
   {
     icon: Cloud,
+    slug: "cloud-solutions",
     title: "Cloud Solutions",
     description:
       "Modernize your infrastructure with scalable cloud architectures, seamless migrations, and optimized multi-cloud strategies.",
   },
   {
     icon: Shield,
+    slug: "cybersecurity",
     title: "Cybersecurity",
     description:
       "Protect your digital assets with comprehensive security frameworks, threat detection, and compliance-driven defense strategies.",
@@ -31,7 +35,7 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="py-24 bg-background">
+    <section id="services" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0 }}
@@ -60,7 +64,7 @@ const ServicesSection = () => {
               <h3 className="text-foreground font-semibold text-lg mb-3">{service.title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">{service.description}</p>
               <Link
-                to="/solutions"
+                to={`/services/${service.slug}`}
                 className="inline-flex items-center gap-2 text-primary text-sm font-medium group-hover:gap-3 transition-all duration-200"
               >
                 Learn More

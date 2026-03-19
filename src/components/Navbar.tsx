@@ -1,49 +1,73 @@
-import { ArrowRight, Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useCallback } from "react";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
-  { label: "Home", to: "/home" },
-  { label: "Solutions", to: "/solutions" },
-  { label: "Industries", to: "/industries" },
+  { label: "Home", to: "/", hash: "" },
+  { label: "About Us", to: "/", hash: "#about" },
+  { label: "Services", to: "/", hash: "#services" },
+  { label: "Industries", to: "/", hash: "#industries" },
 ];
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary border-b-2 border-b-primary">
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-[80px]">
-        <Link to="/home" className="flex items-center gap-2">
-          <img src={logo} alt="AA Innovation" className="h-10 w-auto" decoding="async" width={120} height={40} fetchPriority="high" />
-        </Link>
+  const scrollToSection = useCallback(
+    (hash: string) => {
+      setMobileOpen(false);
+      if (location.pathname !== "/") {
+        navigate("/" + hash);
+        return;
+      }
+      if (!hash) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    },
+    [location.pathname, navigate]
+  );
 
-        <div className="hidden md:flex items-center gap-10">
+  const handleContactClick = () => {
+    setMobileOpen(false);
+    if (location.pathname !== "/") {
+      navigate("/#contact");
+      return;
+    }
+    const el = document.querySelector("#contact");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur-sm border-b border-b-primary/40">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-[72px]">
+        <button onClick={() => scrollToSection("")} className="flex items-center gap-3">
+          <img src={logo} alt="AA Innovation" className="h-12 w-auto" decoding="async" width={160} height={48} fetchPriority="high" />
+          <span className="text-primary-foreground font-bold text-xl tracking-wide hidden sm:inline">AA INNOVATION</span>
+        </button>
+
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.label}
-              to={link.to}
-              className={`relative text-sm tracking-wide transition-colors duration-200 py-2 ${
-                location.pathname === link.to
-                  ? "text-primary-foreground font-semibold"
-                  : "text-primary-foreground/70 hover:text-primary-foreground"
-              }`}
+              onClick={() => scrollToSection(link.hash)}
+              className="text-sm tracking-wide transition-colors duration-200 text-primary-foreground/60 hover:text-primary-foreground"
             >
               {link.label}
-              {location.pathname === link.to && (
-                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
-              )}
-            </Link>
+            </button>
           ))}
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors ml-4"
+          <button
+            onClick={handleContactClick}
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 text-sm font-medium rounded-full hover:bg-primary/90 transition-colors"
           >
             Contact Us
-            <ArrowRight size={14} />
-          </Link>
+          </button>
         </div>
 
         <button className="md:hidden text-primary-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
@@ -52,29 +76,22 @@ const Navbar = () => {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden bg-secondary border-t border-primary/30 px-6 py-6 space-y-4">
+        <div className="md:hidden bg-secondary/95 backdrop-blur-sm border-t border-primary/20 px-6 py-6 space-y-4">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.label}
-              to={link.to}
-              onClick={() => setMobileOpen(false)}
-              className={`block text-sm transition-colors ${
-                location.pathname === link.to
-                  ? "text-primary-foreground font-semibold"
-                  : "text-primary-foreground/70 hover:text-primary-foreground"
-              }`}
+              onClick={() => scrollToSection(link.hash)}
+              className="block text-sm transition-colors text-primary-foreground/60 hover:text-primary-foreground"
             >
               {link.label}
-            </Link>
+            </button>
           ))}
-          <Link
-            to="/"
-            onClick={() => setMobileOpen(false)}
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors mt-2"
+          <button
+            onClick={handleContactClick}
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2 text-sm font-medium rounded-full hover:bg-primary/90 transition-colors mt-2"
           >
             Contact Us
-            <ArrowRight size={14} />
-          </Link>
+          </button>
         </div>
       )}
     </nav>
