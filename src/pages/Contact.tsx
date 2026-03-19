@@ -52,7 +52,7 @@ const Contact = () => {
     setIsSubmitting(true);
     try {
       const formData = new FormData(e.currentTarget);
-      formData.append("access_key", "3ca66874-abca-4f25-888e-a6b5e69fe2fd");
+      formData.append("access_key", "574c7f1d-a43e-4d67-9d35-e675a213f0b8");
       formData.append("subject", "New Contact Form Submission — AA Innovation");
       formData.append("from_name", "AA Innovation Website");
       formData.append("consent", consent);
