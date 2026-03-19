@@ -21,7 +21,7 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    try {
+    try { 
       const formData = new FormData(e.currentTarget);
       formData.append("access_key", "3ca66874-abca-4f25-888e-a6b5e69fe2fd");
       formData.append("subject", "New Contact Form Submission — AA Innovation");
