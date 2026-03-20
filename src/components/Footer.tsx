@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <div className="mb-4">
-              <img src={logo} alt="AA Innovation" className="h-10 w-auto mb-1" loading="lazy" decoding="async" width={120} height={40} />
+              <img src={logo} alt="AA Innovations" className="h-10 w-auto mb-1" loading="lazy" decoding="async" width={120} height={40} />
               <p className="text-horizon text-[10px] tracking-widest uppercase mt-1">Always Ahead.</p>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-6">
@@ -65,7 +65,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-xs">© 2026 AA Innovation LLC. All rights reserved.</p>
+          <p className="text-muted-foreground text-xs">© 2026 AA Innovations LLC. All rights reserved.</p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookies"].map((link) => (
               <a key={link} href="#" className="text-muted-foreground text-xs hover:text-foreground transition-colors">{link}</a>

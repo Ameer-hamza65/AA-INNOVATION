@@ -37,7 +37,7 @@ const PillarsSection = () => {
           <p className="text-primary text-xs tracking-[0.3em] uppercase mb-4 font-medium">How We Deliver</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">Four Pillars of Delivery</h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Everything AA Innovation does connects back to four core delivery pillars. They define who we are,
+            Everything AA Innovations does connects back to four core delivery pillars. They define who we are,
             how we work, and why organizations choose us over firms ten times our size.
           </p>
         </motion.div>

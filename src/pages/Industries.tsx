@@ -7,7 +7,7 @@ import ContactBanner from "@/components/ContactBanner";
 const industries = [
   {
     icon: Zap, title: "Energy", tagline: "Powering the Infrastructure of Tomorrow.",
-    desc: "AA Innovation empowers energy companies to modernize infrastructure, optimize grid management, and accelerate the transition to sustainable operations.",
+    desc: "AA Innovations empowers energy companies to modernize infrastructure, optimize grid management, and accelerate the transition to sustainable operations.",
     bullets: ["Smart grid modernization and energy management systems", "Predictive maintenance and asset performance optimization", "Renewable energy integration and sustainability reporting", "Regulatory compliance: NERC CIP, EPA, FERC, and state frameworks", "Cybersecurity for operational technology (OT) environments"],
   },
   {
@@ -17,27 +17,27 @@ const industries = [
   },
   {
     icon: Factory, title: "Manufacturing", tagline: "The Factory of the Future Is Here.",
-    desc: "AA Innovation helps manufacturers embrace Industry 4.0 by connecting people, machines, and data across the production lifecycle.",
+    desc: "AA Innovations helps manufacturers embrace Industry 4.0 by connecting people, machines, and data across the production lifecycle.",
     bullets: ["Smart factory design and Industry 4.0 roadmapping", "MES implementation and ERP / OT integration", "Predictive quality and defect reduction analytics", "Supply chain visibility, demand forecasting, and inventory optimization", "OT / IT convergence and industrial cybersecurity"],
   },
   {
     icon: DollarSign, title: "Finance", tagline: "Where Risk Meets Resilience.",
-    desc: "In the financial services sector, AA Innovation delivers technology-driven solutions that enhance operational resilience and ensure regulatory compliance.",
+    desc: "In the financial services sector, AA Innovations delivers technology-driven solutions that enhance operational resilience and ensure regulatory compliance.",
     bullets: ["Core banking modernization and cloud migration", "Risk management, AML compliance, and fraud detection", "Regulatory reporting, data governance, and audit readiness", "Wealth management and investment platform development", "Open banking architecture and fintech integration"],
   },
   {
     icon: Users, title: "Consulting", tagline: "Strategic Clarity. Actionable Outcomes.",
-    desc: "AA Innovation's consulting practice brings strategic clarity to complex business challenges with analytical rigor.",
+    desc: "AA Innovations' consulting practice brings strategic clarity to complex business challenges with analytical rigor.",
     bullets: ["Digital strategy and enterprise transformation roadmaps", "Organizational change management and adoption", "Process optimization and operational efficiency", "Technology vendor selection and program management", "Performance benchmarking and KPI development"],
   },
   {
     icon: Building, title: "Federal", tagline: "Mission-Ready. Compliance-Built. Outcome-Accountable.",
-    desc: "AA Innovation is a trusted partner to federal agencies, delivering mission-critical technology solutions.",
+    desc: "AA Innovations is a trusted partner to federal agencies, delivering mission-critical technology solutions.",
     bullets: ["Federal IT modernization and legacy system migration", "Cloud adoption and FedRAMP-compliant infrastructure", "Cybersecurity: FISMA, NIST 800-53, Zero Trust Architecture", "Digital services and citizen experience platform development", "Program management, acquisition support, and CPIC alignment"],
   },
   {
     icon: Truck, title: "Logistics", tagline: "Every Link in the Chain, Optimized.",
-    desc: "AA Innovation provides logistics companies with the digital tools they need to optimize operations and improve visibility.",
+    desc: "AA Innovations provides logistics companies with the digital tools they need to optimize operations and improve visibility.",
     bullets: ["Supply chain visibility and real-time tracking platforms", "Transportation management system (TMS) implementation and optimization", "Warehouse automation and inventory intelligence", "Last-mile delivery optimization and route analytics", "Supply chain resilience modeling and risk scenario planning"],
   },
 ];
@@ -53,7 +53,7 @@ const Industries = () => {
             <p className="text-primary text-xs tracking-[0.3em] uppercase mb-4 font-medium">Where We Operate</p>
             <h1 className="text-4xl md:text-5xl font-black text-foreground mb-6">Industries We Serve</h1>
             <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">
-              AA Innovation delivers specialized capabilities across seven core industries. Every practice
+              AA Innovations delivers specialized capabilities across seven core industries. Every practice
               is led by sector veterans.
             </p>
           </motion.div>

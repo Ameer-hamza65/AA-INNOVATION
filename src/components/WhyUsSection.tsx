@@ -21,7 +21,7 @@ const WhyUsSection = () => {
           className="text-center mb-12"
         >
           <p className="text-primary text-xs tracking-[0.3em] uppercase mb-4 font-medium">The Difference</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">Why AA Innovation</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">Why AA Innovations</h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             Organizations choose us because we deliver more than technology — we deliver outcomes.
           </p>
@@ -35,7 +35,7 @@ const WhyUsSection = () => {
           className="overflow-hidden border border-border rounded-lg"
         >
           <div className="grid grid-cols-2 bg-secondary">
-            <div className="p-4 font-semibold text-sm text-foreground">The AA Innovation Way</div>
+            <div className="p-4 font-semibold text-sm text-foreground">The AA Innovations Way</div>
             <div className="p-4 font-semibold text-sm text-foreground border-l border-border">The Alternative</div>
           </div>
           {rows.map((row, i) => (

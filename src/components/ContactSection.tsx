@@ -21,17 +21,17 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    try { 
+    try {
       const formData = new FormData(e.currentTarget);
       formData.append("access_key", "3ca66874-abca-4f25-888e-a6b5e69fe2fd");
-      formData.append("subject", "New Contact Form Submission — AA Innovation");
-      formData.append("from_name", "AA Innovation Website");
+      formData.append("subject", "New Contact Form Submission — AA Innovations");
+      formData.append("from_name", "AA Innovations Website");
 
       const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
       const data = await res.json();
 
       if (data.success) {
-        toast({ title: "Message sent", description: "Thank you for contacting AA Innovation. We'll be in touch shortly." });
+        toast({ title: "Message sent", description: "Thank you for contacting AA Innovations. We'll be in touch shortly." });
         (e.target as HTMLFormElement).reset();
       } else {
         toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
