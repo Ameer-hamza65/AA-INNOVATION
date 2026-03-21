@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { ArrowRight, Sparkles, Send, ArrowLeft } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { ArrowRight, X } from "lucide-react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
-const serviceOptions = [
-  "AI & Automation",
-  "Data & Analytics",
+const services = [
+  "AI & Machine Learning",
   "Cloud Solutions",
   "Cybersecurity",
+  "Data Analytics",
   "Digital Transformation",
-  "Technology Consulting",
+  "IT Consulting",
+  "Software Development",
   "Other",
 ];
 
@@ -23,7 +23,6 @@ interface ContactFormModalProps {
 const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,201 +50,147 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
     }
   };
 
-  const inputClasses = (name: string) =>
-    `w-full px-4 py-3 border text-sm transition-all duration-300 placeholder:text-muted-foreground rounded-none bg-secondary/50 text-foreground outline-none ${
-      focusedField === name
-        ? "border-primary shadow-[0_0_15px_-3px_hsl(201,100%,36%,0.4)] ring-1 ring-primary/30"
-        : "border-border hover:border-primary/40"
-    }`;
-
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[520px] max-h-[90vh] overflow-y-auto p-0 border-primary/30 bg-gradient-to-b from-secondary via-card to-secondary gap-0">
-        {/* Decorative top accent bar */}
-        <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent" />
+    <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+      <DialogPrimitive.Portal>
+        <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+        <DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-[94vw] max-w-[560px] translate-x-[-50%] translate-y-[-50%] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] focus:outline-none">
+          
+          {/* Close button */}
+          <DialogPrimitive.Close className="absolute -right-3 -top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-primary/40 bg-primary text-primary-foreground shadow-[0_0_12px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_20px_hsl(var(--primary)/0.6)] hover:bg-primary/85 transition-all">
+            <X className="h-4 w-4" />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
 
-        {/* Glowing orb background effect */}
-        <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative p-6 pt-5">
-          <DialogHeader className="space-y-3 mb-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center">
-                <Sparkles size={16} className="text-primary" />
+          {/* Glowing glass container */}
+          <div className="relative border border-white/[0.12] shadow-[0_0_40px_-5px_hsl(var(--primary)/0.25),inset_0_0_40px_-10px_hsl(var(--primary)/0.08)] bg-background/60 backdrop-blur-2xl overflow-hidden">
+            
+            <div className="px-6 pt-4 pb-5 sm:px-8">
+              {/* Header */}
+              <div className="text-center mb-3">
+                <p className="text-[9px] font-semibold tracking-[0.3em] uppercase text-primary mb-0.5">
+                  Get in Touch
+                </p>
+                <DialogPrimitive.Title className="text-lg font-bold text-foreground mb-0.5">
+                  Contact Us
+                </DialogPrimitive.Title>
+                <DialogPrimitive.Description className="text-[11px] text-muted-foreground leading-tight">
+                  Ready to innovate? Let's build what's next — together.
+                </DialogPrimitive.Description>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  Required fields are marked with an asterisk (<span className="text-primary font-bold">*</span>)
+                </p>
               </div>
-              <DialogTitle className="text-xl font-extrabold text-foreground tracking-tight">
-                Let's Build Together
-              </DialogTitle>
+
+              <form onSubmit={handleSubmit} className="space-y-2">
+                {/* Full Name */}
+                <FormField label="Full Name" required>
+                  <input
+                    name="full_name"
+                    type="text"
+                    required
+                    placeholder="Jane Doe"
+                    className="form-input-style"
+                  />
+                </FormField>
+
+                {/* Email */}
+                <FormField label="Email" required>
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="jane.doe@company.com"
+                    className="form-input-style"
+                  />
+                </FormField>
+
+                {/* Message */}
+                <FormField label="Message" required>
+                  <textarea
+                    name="message"
+                    required
+                    rows={2}
+                    maxLength={2000}
+                    placeholder="Tell us about your project, challenge, or question..."
+                    className="form-input-style resize-none"
+                  />
+                </FormField>
+
+                {/* Company Name */}
+                <FormField label="Company Name">
+                  <input
+                    name="company"
+                    type="text"
+                    placeholder="Your Company (optional)"
+                    className="form-input-style"
+                  />
+                </FormField>
+
+                {/* Phone Number */}
+                <FormField label="Phone Number" hint="for faster response">
+                  <input
+                    name="phone"
+                    type="tel"
+                    placeholder="+1 (555) ..."
+                    className="form-input-style"
+                  />
+                </FormField>
+
+                {/* Service Interest */}
+                <FormField label="Service Interest">
+                  <Select name="service_interest">
+                    <SelectTrigger className="w-full px-3 py-1.5 h-auto border border-white/10 bg-white/5 backdrop-blur-sm text-xs text-muted-foreground rounded-none focus:border-primary/60">
+                      <SelectValue placeholder="Select a service (optional)" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {services.map((s) => (
+                        <SelectItem key={s} value={s}>{s}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                {/* Submit */}
+                <div className="pt-0.5">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-2 text-xs font-semibold rounded-full hover:bg-primary/85 transition-colors disabled:opacity-50 shadow-[0_0_15px_-3px_hsl(var(--primary)/0.4)]"
+                  >
+                    {isSubmitting ? "Sending..." : "Submit"} <ArrowRight size={14} />
+                  </button>
+                </div>
+              </form>
             </div>
-            <DialogDescription className="text-muted-foreground text-sm leading-relaxed">
-              Tell us about your vision. We'll respond within 24 hours.
-            </DialogDescription>
-          </DialogHeader>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Full Name */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 }}
-            >
-              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                Full Name <span className="text-primary">*</span>
-              </label>
-              <input
-                name="full_name"
-                required
-                placeholder="Jane Doe"
-                onFocus={() => setFocusedField("name")}
-                onBlur={() => setFocusedField(null)}
-                className={inputClasses("name")}
-              />
-            </motion.div>
-
-            {/* Email */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                Email <span className="text-primary">*</span>
-              </label>
-              <input
-                name="email"
-                type="email"
-                required
-                placeholder="jane.doe@company.com"
-                onFocus={() => setFocusedField("email")}
-                onBlur={() => setFocusedField(null)}
-                className={inputClasses("email")}
-              />
-            </motion.div>
-
-            {/* Message */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 }}
-            >
-              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                Message <span className="text-primary">*</span>
-              </label>
-              <textarea
-                name="message"
-                required
-                rows={3}
-                maxLength={2000}
-                placeholder="Tell us about your project, challenge, or question..."
-                onFocus={() => setFocusedField("message")}
-                onBlur={() => setFocusedField(null)}
-                className={`${inputClasses("message")} resize-none`}
-              />
-            </motion.div>
-
-            {/* Company & Phone */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="grid sm:grid-cols-2 gap-4"
-            >
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                  Company
-                </label>
-                <input
-                  name="company"
-                  placeholder="Your Company"
-                  onFocus={() => setFocusedField("company")}
-                  onBlur={() => setFocusedField(null)}
-                  className={inputClasses("company")}
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                  Phone
-                </label>
-                <input
-                  name="phone"
-                  type="tel"
-                  placeholder="+1 (555) 000-0000"
-                  onFocus={() => setFocusedField("phone")}
-                  onBlur={() => setFocusedField(null)}
-                  className={inputClasses("phone")}
-                />
-              </div>
-            </motion.div>
-
-            {/* Service Interest */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25 }}
-            >
-              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                Service Interest
-              </label>
-              <Select name="service_interest">
-                <SelectTrigger className="w-full px-4 py-3 h-auto border border-border bg-secondary/50 text-sm hover:border-primary/40 transition-all duration-300">
-                  <SelectValue placeholder="Select a service (optional)" />
-                </SelectTrigger>
-                <SelectContent>
-                  {serviceOptions.map((opt) => (
-                    <SelectItem key={opt} value={opt}>{opt}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </motion.div>
-
-            {/* Divider */}
-            <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-            {/* Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex items-center gap-3 pt-1"
-            >
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="group relative inline-flex items-center gap-2.5 bg-primary text-primary-foreground px-7 py-3 text-sm font-semibold rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_25px_-5px_hsl(201,100%,36%,0.5)] hover:bg-primary/90 disabled:opacity-50"
-              >
-                <span className="relative z-10 flex items-center gap-2.5">
-                  {isSubmitting ? (
-                    <>
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
-                      />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <Send size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-                    </>
-                  )}
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={() => onOpenChange(false)}
-                className="inline-flex items-center gap-2 text-muted-foreground px-5 py-3 text-sm font-medium rounded-full hover:text-foreground hover:bg-secondary transition-all duration-200"
-              >
-                <ArrowLeft size={14} />
-                Go Back
-              </button>
-            </motion.div>
-          </form>
-        </div>
-      </DialogContent>
-    </Dialog>
+          </div>
+        </DialogPrimitive.Content>
+      </DialogPrimitive.Portal>
+    </DialogPrimitive.Root>
   );
 };
+
+/* ── Sub-component ── */
+
+const FormField = ({
+  label,
+  required,
+  hint,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  hint?: string;
+  children: React.ReactNode;
+}) => (
+  <div>
+    <label className="block text-xs font-medium text-foreground mb-1">
+      {label}
+      {required && <span className="text-primary/70 ml-0.5">*</span>}
+      {hint && <span className="text-[10px] font-normal text-muted-foreground ml-1.5">({hint})</span>}
+    </label>
+    {children}
+  </div>
+);
 
 export default ContactFormModal;

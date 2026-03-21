@@ -22,8 +22,7 @@ const locations = [
 
 const quickLinks = [
   {
-    icon: Briefcase,
-    title: "Careers",
+    icon: Briefcas
        description: "Explore career opportunities at AA Innovations and join our team of innovators.",
     linkText: "View Open Positions",
   },
@@ -293,6 +292,33 @@ const FormSelect = ({
     <Select name={name} required={required}>
       <SelectTrigger className="w-full px-4 py-3 h-auto border border-border bg-card text-sm">
         <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map((opt) => (
+          <SelectItem key={opt} value={opt}>
+            {opt}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  </div>
+);
+
+export default Contact;
+    <SelectValue placehoder={placeholder} />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map((opt) => (
+          <SelectItem key={opt} value={opt}>
+            {opt}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  </div>
+);
+
+export default Contact;lder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         {options.map((opt) => (
