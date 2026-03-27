@@ -18,8 +18,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <div className="mb-4">
-              <img src={logo} alt="AA Innovation" className="h-10 w-auto mb-1" loading="lazy" decoding="async" width={120} height={40} />
-              <p className="text-horizon text-[10px] tracking-widest uppercase mt-1">Always Ahead.</p>
+              <Logo size="sm" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-6">
               Empowering organizations through innovative technology solutions.

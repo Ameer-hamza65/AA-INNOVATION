@@ -24,7 +24,7 @@ const quickLinks = [
   {
     icon: Briefcase,
     title: "Careers",
-    description: "Explore career opportunities at AA Innovation and join our team of innovators.",
+       description: "Explore career opportunities at AA Innovations and join our team of innovators.",
     linkText: "View Open Positions",
   },
   {
@@ -52,9 +52,9 @@ const Contact = () => {
     setIsSubmitting(true);
     try {
       const formData = new FormData(e.currentTarget);
-      formData.append("access_key", "574c7f1d-a43e-4d67-9d35-e675a213f0b8");
-      formData.append("subject", "New Contact Form Submission — AA Innovation");
-      formData.append("from_name", "AA Innovation Website");
+      formData.append("access_key", "792614a7-30bf-4834-bd63-f8113a8b3017");
+      formData.append("subject", "New Contact Form Submission — AA Innovations");
+      formData.append("from_name", "AA Innovations Website");
       formData.append("consent", consent);
 
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -293,33 +293,6 @@ const FormSelect = ({
     <Select name={name} required={required}>
       <SelectTrigger className="w-full px-4 py-3 h-auto border border-border bg-card text-sm">
         <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent>
-        {options.map((opt) => (
-          <SelectItem key={opt} value={opt}>
-            {opt}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  </div>
-);
-
-export default Contact;
-    <SelectValue placehoder={placeholder} />
-      </SelectTrigger>
-      <SelectContent>
-        {options.map((opt) => (
-          <SelectItem key={opt} value={opt}>
-            {opt}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  </div>
-);
-
-export default Contact;lder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         {options.map((opt) => (
