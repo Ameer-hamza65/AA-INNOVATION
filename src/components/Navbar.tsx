@@ -44,11 +44,6 @@ const Navbar = ({ onContactClick }: { onContactClick?: () => void } = {}) => {
 
   const handleContactClick = () => {
     setMobileOpen(false);
-    setSheetOpen(false);
-    if (onContactClick) {
-      onContactClick();
-      return;
-    }
     if (location.pathname !== "/") {
       navigate("/#contact");
       return;
@@ -58,12 +53,12 @@ const Navbar = ({ onContactClick }: { onContactClick?: () => void } = {}) => {
   };
 
   return (
-    <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur-sm border-b border-b-primary/40">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-[72px]">
-          <button onClick={() => scrollToSection("")} className="flex items-center">
-            <Logo size="md" />
-          </button>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur-sm border-b border-b-primary/40">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-[72px]">
+        <button onClick={() => scrollToSection("")} className="flex items-center gap-3">
+          <img src={logo} alt="AA Innovation" className="h-12 w-auto" decoding="async" width={160} height={48} fetchPriority="high" />
+          <span className="text-primary-foreground font-bold text-xl tracking-wide hidden sm:inline">AA INNOVATION</span>
+        </button>
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (

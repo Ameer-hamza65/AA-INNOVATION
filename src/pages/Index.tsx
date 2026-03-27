@@ -14,7 +14,6 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const Index = () => {
   const location = useLocation();
-  const [contactModalOpen, setContactModalOpen] = useState(false);
 
   useEffect(() => {
     if (location.hash) {
