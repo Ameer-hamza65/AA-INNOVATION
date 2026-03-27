@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-const HeroSection = () => {
+const HeroSection = ({ onContactClick }: { onContactClick?: () => void } = {}) => {
   const scrollToContact = () => {
+    if (onContactClick) {
+      onContactClick();
+      return;
+    }
     const el = document.querySelector("#contact");
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };

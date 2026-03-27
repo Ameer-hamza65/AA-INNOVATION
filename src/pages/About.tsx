@@ -23,7 +23,7 @@ const About = () => {
               <Link to="/" className="inline-flex items-center gap-2 text-primary text-sm font-medium mb-6 hover:gap-3 transition-all">
                 <ArrowLeft size={16} /> Back to Home
               </Link>
-              <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3 font-medium">About AA Innovation</p>
+              <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3 font-medium">About AA Innovations</p>
               <h1 className="text-4xl md:text-5xl font-black text-foreground">Who We Are</h1>
             </motion.div>
           </div>
@@ -34,12 +34,12 @@ const About = () => {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-                <img src={teamImg} alt="AA Innovation team" className="w-full h-auto rounded-lg object-cover" loading="lazy" />
+                <img src={teamImg} alt="AA Innovations team" className="w-full h-auto rounded-lg object-cover" loading="lazy" />
               </motion.div>
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.1 }} viewport={{ once: true }} className="space-y-6">
                 <h2 className="text-2xl font-extrabold text-foreground">What Drives Us</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  AA Innovation LLC is a forward-thinking technology and consulting firm dedicated to delivering
+                  AA Innovations LLC is a forward-thinking technology and consulting firm dedicated to delivering
                   transformative solutions that drive business growth and operational excellence. We partner with
                   organizations across Energy, Healthcare, Manufacturing, Finance, Consulting, Federal, and Logistics.
                 </p>

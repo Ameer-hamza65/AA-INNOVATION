@@ -15,7 +15,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
           >
             <div className="relative overflow-hidden">
-              <img src={teamImg} alt="AA Innovation team collaboration" className="w-full h-[400px] md:h-[500px] object-cover" loading="lazy" decoding="async" width={800} height={500} />
+              <img src={teamImg} alt="AA Innovations team collaboration" className="w-full h-[400px] md:h-[500px] object-cover" loading="lazy" decoding="async" width={800} height={500} />
               <div className="absolute bottom-6 left-6 right-6 bg-card/90 backdrop-blur-sm p-6 rounded-lg border border-border">
                 <p className="text-xs tracking-[0.3em] uppercase text-primary font-medium mb-2">Our Services</p>
                 <p className="text-foreground text-sm leading-relaxed">
@@ -35,13 +35,13 @@ const AboutSection = () => {
             <p className="text-primary text-xs tracking-[0.3em] uppercase font-medium">About Us</p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">Who We Are</h2>
             <p className="text-muted-foreground leading-relaxed">
-              AA Innovation LLC is a forward-thinking technology and consulting firm dedicated to delivering
+              AA Innovations LLC is a forward-thinking technology and consulting firm dedicated to delivering
               transformative solutions that drive business growth and operational excellence. We partner with
               organizations across a broad spectrum of industries — including Energy, Healthcare, Manufacturing,
               Finance, Consulting, Federal, and Logistics.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              At AA Innovation, we bring together a diverse team of experienced professionals, technologists,
+              At AA Innovations, we bring together a diverse team of experienced professionals, technologists,
               and industry specialists with deep domain expertise across every sector we serve.
             </p>
             <Link

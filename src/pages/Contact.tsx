@@ -24,13 +24,13 @@ const quickLinks = [
   {
     icon: Briefcase,
     title: "Careers",
-    description: "Explore career opportunities at AA Innovation and join our team of innovators.",
+       description: "Explore career opportunities at AA Innovations and join our team of innovators.",
     linkText: "View Open Positions",
   },
   {
     icon: MapPin,
     title: "Our Locations",
-    description: "Find AA Innovation offices and learn about our presence across the globe.",
+       description: "Find AA Innovations offices and learn about our presence across the globe.",
     linkText: "See Locations",
   },
   {
@@ -52,9 +52,9 @@ const Contact = () => {
     setIsSubmitting(true);
     try {
       const formData = new FormData(e.currentTarget);
-      formData.append("access_key", "574c7f1d-a43e-4d67-9d35-e675a213f0b8");
-      formData.append("subject", "New Contact Form Submission — AA Innovation");
-      formData.append("from_name", "AA Innovation Website");
+      formData.append("access_key", "792614a7-30bf-4834-bd63-f8113a8b3017");
+      formData.append("subject", "New Contact Form Submission — AA Innovations");
+      formData.append("from_name", "AA Innovations Website");
       formData.append("consent", consent);
 
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -64,7 +64,7 @@ const Contact = () => {
       const data = await res.json();
 
       if (data.success) {
-        toast({ title: "Message sent", description: "Thank you for contacting AA Innovation. We'll be in touch shortly." });
+        toast({ title: "Message sent", description: "Thank you for contacting AA Innovations. We'll be in touch shortly." });
         (e.target as HTMLFormElement).reset();
         setConsent("");
         setPrivacyAccepted(false);
@@ -86,7 +86,7 @@ const Contact = () => {
       <section className="bg-secondary pt-28 pb-12 border-b border-border">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-            <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3 font-medium">AA Innovation LLC</p>
+            <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3 font-medium">AA Innovations LLC</p>
             <h1 className="text-4xl md:text-5xl font-black text-foreground">Contact us</h1>
           </motion.div>
         </div>
@@ -149,22 +149,11 @@ const Contact = () => {
                   placeholder="Tell us about your project, challenge, or question..."
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  How can we help? <span className="text-primary">*</span>
-                </label>
-                <textarea
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none placeholder:text-muted-foreground"
-                  placeholder="Tell us about your project, challenge, or question..."
-                />
-              </div>
 
               {/* Consent Radio */}
               <div>
                 <p className="text-sm font-medium text-foreground mb-3">
-                  May we contact you about AA Innovation services and events? <span className="text-primary">*</span>
+                  May we contact you about AA Innovations services and events? <span className="text-primary">*</span>
                 </p>
                 <RadioGroup value={consent} onValueChange={setConsent} className="flex gap-6">
                   <div className="flex items-center gap-2">
