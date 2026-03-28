@@ -67,7 +67,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-xs">© 2026 AA Innovations LLC. All rights reserved.</p>
+          <p className="text-muted-foreground text-xs">© 2026 AA Innovation LLC. All rights reserved.</p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookies"].map((link) => (
               <a key={link} href="#" className="text-muted-foreground text-xs hover:text-foreground transition-colors">{link}</a>

@@ -73,10 +73,19 @@
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
   h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.02em;
+  }
+
+  a, button {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  section {
+    transition: opacity 0.5s ease;
   }
 }
 

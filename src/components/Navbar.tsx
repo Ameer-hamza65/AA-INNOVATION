@@ -1,6 +1,7 @@
-import { Menu, User, HelpCircle, Mail } from "lucide-react";
+import { Menu, User, HelpCircle, LogOut, ChevronDown } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useCallback } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import Logo from "@/components/Logo";
 import {
   Sheet,
@@ -9,18 +10,27 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navLinks = [
   { label: "Home", to: "/", hash: "" },
   { label: "About Us", to: "/", hash: "#about" },
   { label: "Services", to: "/", hash: "#services" },
   { label: "Industries", to: "/", hash: "#industries" },
+  { label: "Contact Us", to: "/", hash: "#contact" },
 ];
 
 const Navbar = ({ onContactClick }: { onContactClick?: () => void } = {}) => {
   const location = useLocation();
   const navigate = useNavigate();
-  // Removed the redundant mobileOpen state! We only need the sheet now.
+  const { user, logout } = useAuth();
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const scrollToSection = useCallback(
@@ -42,18 +52,10 @@ const Navbar = ({ onContactClick }: { onContactClick?: () => void } = {}) => {
     [location.pathname, navigate]
   );
 
-  const handleContactClick = () => {
+  const handleLogout = () => {
+    logout();
     setSheetOpen(false);
-    if (onContactClick) {
-      onContactClick();
-      return;
-    }
-    if (location.pathname !== "/") {
-      navigate("/#contact");
-      return;
-    }
-    const el = document.querySelector("#contact");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    navigate("/");
   };
 
   return (
@@ -64,6 +66,7 @@ const Navbar = ({ onContactClick }: { onContactClick?: () => void } = {}) => {
             <Logo size="md" />
           </button>
 
+          {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <button
@@ -74,80 +77,97 @@ const Navbar = ({ onContactClick }: { onContactClick?: () => void } = {}) => {
                 {link.label}
               </button>
             ))}
-            <button
-              onClick={handleContactClick}
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 text-sm font-medium rounded-none hover:bg-primary/90 transition-colors"
-            >
-              Contact Us
-            </button>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-1.5 text-sm tracking-wide text-primary font-medium hover:text-primary/80 transition-colors outline-none">
+                  {user.name}
+                  <ChevronDown size={14} className="opacity-60" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-secondary/95 backdrop-blur-xl border-primary/20 text-foreground">
+                  <DropdownMenuLabel className="text-muted-foreground text-xs font-normal">{user.email}</DropdownMenuLabel>
+                  <DropdownMenuSeparator className="bg-primary/10" />
+                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-destructive focus:text-destructive focus:bg-destructive/10">
+                    <LogOut size={14} className="mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                to="/login"
+                className="text-sm tracking-wide transition-colors duration-300 text-primary-foreground/60 hover:text-primary-foreground"
+              >
+                Profile
+              </Link>
+            )}
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* ONLY ONE Hamburger menu for all screens */}
-            <button
-              className="text-primary-foreground hover:text-primary transition-colors p-2"
-              onClick={() => setSheetOpen(true)}
-              aria-label="Open menu"
-            >
-              <Menu size={24} />
-            </button>
-          </div>
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden text-primary-foreground hover:text-primary transition-colors"
+            onClick={() => setSheetOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu size={24} />
+          </button>
         </div>
       </nav>
 
-      {/* Unified Side Panel / Hamburger Sheet */}
+      {/* Mobile Sheet menu */}
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-        <SheetContent side="right" className="bg-secondary/95 backdrop-blur-xl border-l border-primary/20 w-[280px] sm:max-w-[280px] rounded-none">
-          <SheetHeader className="mb-8 mt-4">
+        <SheetContent side="right" className="bg-secondary/95 backdrop-blur-xl border-l border-primary/20 w-[280px] sm:max-w-[280px]">
+          <SheetHeader className="mb-8">
             <SheetTitle className="text-foreground text-left">Menu</SheetTitle>
             <SheetDescription className="text-muted-foreground text-left text-xs">
-              Navigation and quick access
+              Quick access links
             </SheetDescription>
           </SheetHeader>
 
-          <div className="flex flex-col gap-6">
-            
-            {/* Core Nav - Only shows in the drawer on Mobile (md:hidden) */}
-            <div className="md:hidden flex flex-col space-y-4 border-b border-primary/20 pb-6">
-              {navLinks.map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => scrollToSection(link.hash)}
-                  className="text-left text-sm font-medium text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
+          <div className="space-y-2">
+            {navLinks.map((link) => (
+              <button
+                key={link.label}
+                onClick={() => scrollToSection(link.hash)}
+                className="flex items-center gap-3 px-4 py-3 text-sm text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/5 transition-colors rounded-md w-full text-left"
+              >
+                {link.label}
+              </button>
+            ))}
 
-            {/* Utility Links (CR-005) - Always shows in the drawer */}
-            <div className="flex flex-col space-y-2">
+            {user ? (
+              <>
+                <div className="flex items-center gap-3 px-4 py-3 text-sm text-primary font-medium rounded-md">
+                  <User size={18} className="text-primary" />
+                  {user.name}
+                </div>
+                <div className="px-4 py-1 text-xs text-muted-foreground">{user.email}</div>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-3 px-4 py-3 text-sm text-destructive hover:bg-destructive/10 transition-all duration-300 rounded-md w-full text-left"
+                >
+                  <LogOut size={18} />
+                  Logout
+                </button>
+              </>
+            ) : (
               <Link
                 to="/login"
                 onClick={() => setSheetOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 text-sm text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/5 transition-colors rounded-none"
+                className="flex items-center gap-3 px-4 py-3 text-sm text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/5 transition-all duration-300 rounded-md"
               >
                 <User size={18} className="text-primary" />
                 Profile
               </Link>
+            )}
 
-              <Link
-                to="/faq"
-                onClick={() => setSheetOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 text-sm text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/5 transition-colors rounded-none"
-              >
-                <HelpCircle size={18} className="text-primary" />
-                FAQ
-              </Link>
-
-              <button
-                onClick={handleContactClick}
-                className="flex items-center gap-3 px-4 py-3 text-sm text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/5 transition-colors rounded-none w-full text-left"
-              >
-                <Mail size={18} className="text-primary" />
-                Contact Us
-              </button>
-            </div>
+            <Link
+              to="/faq"
+              onClick={() => setSheetOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 text-sm text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/5 transition-colors rounded-md"
+            >
+              <HelpCircle size={18} className="text-primary" />
+              FAQ
+            </Link>
           </div>
         </SheetContent>
       </Sheet>

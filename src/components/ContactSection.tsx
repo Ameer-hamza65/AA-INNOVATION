@@ -24,14 +24,14 @@ const ContactSection = () => {
     try {
       const formData = new FormData(e.currentTarget);
       formData.append("access_key", "792614a7-30bf-4834-bd63-f8113a8b3017");
-      formData.append("subject", "New Contact Form Submission — AA Innovations");
-      formData.append("from_name", "AA Innovations Website");
+      formData.append("subject", "New Contact Form Submission — AA Innovation");
+      formData.append("from_name", "AA Innovation Website");
 
       const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
       const data = await res.json();
 
       if (data.success) {
-        toast({ title: "Message sent", description: "Thank you for contacting AA Innovations. We'll be in touch shortly." });
+        toast({ title: "Message sent", description: "Thank you for contacting AA Innovation. We'll be in touch shortly." });
         (e.target as HTMLFormElement).reset();
       } else {
         toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });

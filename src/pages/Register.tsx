@@ -1,21 +1,34 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, Mail, Lock, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Register = () => {
   const { toast } = useToast();
+  const { register } = useAuth();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast({ title: "Error", description: "Passwords do not match.", variant: "destructive" });
+      return;
+    }
     setIsSubmitting(true);
     setTimeout(() => {
-      toast({ title: "Coming Soon", description: "Registration will be available soon." });
+      register(name, email, password);
+      toast({ title: "Account created!", description: "Welcome to AA Innovation." });
       setIsSubmitting(false);
+      navigate("/");
     }, 800);
   };
 
@@ -33,7 +46,7 @@ const Register = () => {
               <Logo size="md" showText={false} />
             </div>
             <h1 className="text-xl font-bold text-foreground mb-1">Create Account</h1>
-            <p className="text-xs text-muted-foreground">Join AA Innovations today</p>
+            <p className="text-xs text-muted-foreground">Join AA Innovation today</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-3">
@@ -41,7 +54,7 @@ const Register = () => {
               <label className="block text-xs font-medium text-foreground mb-1">Full Name</label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/60" />
-                <input type="text" required placeholder="Jane Doe" className="form-input-style pl-9" />
+                <input type="text" required placeholder="Jane Doe" value={name} onChange={e => setName(e.target.value)} className="form-input-style pl-9" />
               </div>
             </div>
 
@@ -49,7 +62,7 @@ const Register = () => {
               <label className="block text-xs font-medium text-foreground mb-1">Email</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/60" />
-                <input type="email" required placeholder="jane.doe@company.com" className="form-input-style pl-9" />
+                <input type="email" required placeholder="jane.doe@company.com" value={email} onChange={e => setEmail(e.target.value)} className="form-input-style pl-9" />
               </div>
             </div>
 
@@ -57,7 +70,7 @@ const Register = () => {
               <label className="block text-xs font-medium text-foreground mb-1">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/60" />
-                <input type="password" required placeholder="••••••••" className="form-input-style pl-9" />
+                <input type="password" required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="form-input-style pl-9" />
               </div>
             </div>
 
@@ -65,7 +78,7 @@ const Register = () => {
               <label className="block text-xs font-medium text-foreground mb-1">Confirm Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/60" />
-                <input type="password" required placeholder="••••••••" className="form-input-style pl-9" />
+                <input type="password" required placeholder="••••••••" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="form-input-style pl-9" />
               </div>
             </div>
 

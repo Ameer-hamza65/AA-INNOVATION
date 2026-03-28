@@ -1,21 +1,28 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, Mail, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Login = () => {
   const { toast } = useToast();
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setTimeout(() => {
-      toast({ title: "Coming Soon", description: "Login functionality will be available soon." });
+      login(email, password);
+      toast({ title: "Welcome back!", description: "You have been signed in successfully." });
       setIsSubmitting(false);
+      navigate("/");
     }, 800);
   };
 
@@ -33,7 +40,7 @@ const Login = () => {
               <Logo size="md" showText={false} />
             </div>
             <h1 className="text-xl font-bold text-foreground mb-1">Welcome Back</h1>
-            <p className="text-xs text-muted-foreground">Sign in to your AA Innovations account</p>
+            <p className="text-xs text-muted-foreground">Sign in to your AA Innovation account</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -41,7 +48,7 @@ const Login = () => {
               <label className="block text-xs font-medium text-foreground mb-1">Email</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/60" />
-                <input type="email" required placeholder="jane.doe@company.com" className="form-input-style pl-9" />
+                <input type="email" required placeholder="jane.doe@company.com" value={email} onChange={e => setEmail(e.target.value)} className="form-input-style pl-9" />
               </div>
             </div>
 
@@ -52,7 +59,7 @@ const Login = () => {
               </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/60" />
-                <input type="password" required placeholder="••••••••" className="form-input-style pl-9" />
+                <input type="password" required placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} className="form-input-style pl-9" />
               </div>
             </div>
 

@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import About from "./pages/About.tsx";
@@ -17,6 +18,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <AuthProvider>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -34,6 +36,7 @@ const App = () => (
       </BrowserRouter>
       <Analytics />
     </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 
